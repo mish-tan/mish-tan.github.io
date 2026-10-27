@@ -8,8 +8,8 @@
     <ul>
       <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>home</a></li>
       <li><a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' %} aria-current="page"{% endif %}>blog</a></li>
-      <li><a href="{{ '/' | relative_url }}">sketch notes</a></li>
-      <li><a href="{{ '/' | relative_url }}">reading club</a></li>
+      <li><a href="{{ '/sketchnotes/' | relative_url }}">sketchnotes</a></li>
+      <li><a href="{{ '/reading-club/' | relative_url }}">reading club</a></li>
     </ul>
   </nav>
 </header>
