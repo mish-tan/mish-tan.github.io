@@ -1,0 +1,19 @@
+title: mish mash tan
+description: artist・coder・community organiser
+timezone: Asia/Tokyo
+
+# Blog posts live at /blog/2026/10/28/my-post-title/
+permalink: /blog/:year/:month/:day/:title/
+
+markdown: kramdown
+
+# Every post uses the post layout automatically
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - README.md
