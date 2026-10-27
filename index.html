@@ -27,20 +27,24 @@
       font-weight: 500;
     }
 
-    /* The "stage" keeps everything in the same positions as the sketch and scales with the screen */
+    /* The "stage" holds everything. On desktop the drawings and text stay
+       the same size; only their positions (in %) slide towards the centre
+       as the screen gets narrower. */
     .stage {
       position: relative;
       width: min(100% - 32px, 1100px);
-      aspect-ratio: 795 / 625;
+      height: 865px;
       margin: 0 auto;
+      overflow-x: clip;
     }
 
     /* On bigger screens, centre the drawing vertically */
-    @media (min-width: 701px) {
+    @media (min-width: 801px) {
       body { display: grid; place-items: center; min-height: 100vh; }
     }
 
-    .art { position: absolute; display: block; height: auto; }
+    /* Each drawing is placed by its centre point, so it slides inwards evenly */
+    .art { position: absolute; display: block; height: auto; transform: translateX(-50%); }
     .art svg { display: block; width: 100%; height: auto; }
 
     /* ---------- Navigation ---------- */
@@ -48,16 +52,17 @@
 
     .nav {
       position: absolute;
-      top: 3%;
-      left: 14%;
-      right: 10%;
+      top: 26px;
+      left: 46%;
+      transform: translateX(-50%);
       z-index: 3;
     }
 
     .nav ul {
       display: flex;
-      flex-wrap: wrap;
-      gap: clamp(8px, 1.8vw, 20px);
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      gap: 20px;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -68,7 +73,7 @@
       background: var(--teal);
       color: var(--white);
       text-decoration: none;
-      font-size: clamp(16px, 2.2vw, 26px);
+      font-size: 26px;
       line-height: 1;
       padding: 0.45em 1em;
       border-radius: 0.5em;
@@ -85,27 +90,28 @@
     }
 
     /* ---------- Artwork positions (desktop) ---------- */
-    .title { position: absolute; left: 20.5%; top: 19.5%; width: 58%; margin: 0; z-index: 1; }
+    /* left = where the centre of each item sits; width/top are fixed sizes */
+    .title { position: absolute; left: 49.5%; top: 169px; width: 638px; margin: 0; z-index: 1; transform: translateX(-50%); }
     .title .mobile { display: none; }
-    .flying  { left: 61.5%; top: 15%;  width: 32%; }
-    .laptop  { left: 14%;   top: 46%;  width: 16%; }
-    .waving  { left: 63.5%; top: 55.5%; width: 18%; }
+    .flying  { left: 77.5%; top: 130px; width: 352px; }
+    .laptop  { left: 22%;   top: 398px; width: 176px; }
+    .waving  { left: 72.5%; top: 480px; width: 198px; }
 
     /* ---------- Tagline and links ---------- */
     .about {
       position: absolute;
       left: 16.5%;
-      top: 82%;
+      top: 709px;
       z-index: 2;
       line-height: 1.35;
     }
 
     .tagline {
       margin: 0;
-      font-size: clamp(15px, 2.1vw, 24px);
+      font-size: 24px;
     }
 
-    .links { list-style: none; margin: 0.3em 0 0; padding: 0; font-size: clamp(14px, 1.6vw, 19px); }
+    .links { list-style: none; margin: 0.3em 0 0; padding: 0; font-size: 19px; }
     .links a { color: var(--maroon); text-decoration: underline; text-underline-offset: 3px; }
 
     .visually-hidden {
@@ -114,12 +120,15 @@
     }
 
     /* ---------- Mobile ---------- */
-    @media (max-width: 700px) {
+    @media (max-width: 800px) {
       .stage {
         width: 100%;
         max-width: 480px;
+        height: auto;
         aspect-ratio: 328 / 625;
       }
+
+      .art, .title, .nav { transform: none; }
 
       .menu-toggle {
         display: flex;
