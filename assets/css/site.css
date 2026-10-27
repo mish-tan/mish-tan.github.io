@@ -112,7 +112,7 @@ button:focus-visible {
    towards the middle as the screen narrows */
 .art { position: absolute; display: block; height: auto; transform: translateX(-50%); }
 .drawing { left: 77.5%; top: 130px; width: 352px; }
-.laptop { left: 22%;   top: 398px; width: 176px; }
+.laptop { left: 20%;   top: 398px; width: 176px; }
 .waving { left: 72.5%; top: 480px; width: 198px; }
 
 .content {
