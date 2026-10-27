@@ -18,17 +18,19 @@ title: blog
     {% if post.cover %}
     <img class="cover" src="{{ post.cover | relative_url }}" alt="" loading="lazy">
     {% endif %}
-    <div class="post-card-head">
-      <h2 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <h2 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <p class="post-card-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time></p>
+    <!-- Tags on the left, "expand…" in the bottom-right corner -->
+    <div class="post-card-foot">
+      {% if post.tags.size > 0 %}
+      <ul class="tags" aria-label="Tags">
+        {% for tag in post.tags %}
+        <li><a href="{{ '/blog/' | relative_url }}?tag={{ tag | url_encode }}">{{ tag }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
       <span class="expand" aria-hidden="true">expand…</span>
     </div>
-    {% if post.tags.size > 0 %}
-    <ul class="tags" aria-label="Tags">
-      {% for tag in post.tags %}
-      <li><a href="{{ '/blog/' | relative_url }}?tag={{ tag | url_encode }}">{{ tag }}</a></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
   </li>
   {% endfor %}
 </ul>

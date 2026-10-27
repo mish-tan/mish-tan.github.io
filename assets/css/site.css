@@ -8,11 +8,11 @@
 
 /* ---------- 1. Shared ---------- */
 :root {
-  --pink: #fedbee;
-  --teal: #4dd4ca;
-  --mint: #d3f2f0;
-  --maroon: #740e0e;
-  --white: #ffffff;
+  --pink: #FEDBEE;
+  --teal: #4DD4CA;
+  --mint: #D3F2F0;
+  --maroon: #740E0E;
+  --white: #FFFFFF;
 
   /* The drawing area that the nav, characters and homepage share */
   --stage-width: min(100% - 32px, 1100px);
@@ -20,36 +20,25 @@
   --header-height: 100px;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html,
-body {
+html, body {
   margin: 0;
   min-height: 100%;
   background: var(--pink);
   color: var(--maroon);
-  font-family: "Fredoka", "Arial Rounded MT Bold", system-ui, sans-serif;
+  font-family: 'Fredoka', 'Arial Rounded MT Bold', system-ui, sans-serif;
   font-weight: 500;
 }
 
-body {
-  position: relative;
-}
+body { position: relative; }
 
 .visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
 }
 
-[hidden] {
-  display: none !important;
-}
+[hidden] { display: none !important; }
 
 a:focus-visible,
 button:focus-visible {
@@ -68,9 +57,7 @@ button:focus-visible {
   height: var(--header-height);
 }
 
-.menu-toggle {
-  display: none;
-}
+.menu-toggle { display: none; }
 
 .nav {
   position: absolute;
@@ -101,9 +88,7 @@ button:focus-visible {
   transition: transform 0.15s ease;
 }
 
-.nav a:hover {
-  transform: translateY(-2px) rotate(-1deg);
-}
+.nav a:hover { transform: translateY(-2px) rotate(-1deg); }
 
 /* Characters: on the blog they stay in place while the cards scroll */
 .backdrop {
@@ -125,27 +110,10 @@ button:focus-visible {
 
 /* Fixed sizes; "left" is where each drawing's centre sits, so they slide
    towards the middle as the screen narrows */
-.art {
-  position: absolute;
-  display: block;
-  height: auto;
-  transform: translateX(-50%);
-}
-.drawing {
-  left: 77.5%;
-  top: 130px;
-  width: 352px;
-}
-.laptop {
-  left: 22%;
-  top: 398px;
-  width: 176px;
-}
-.waving {
-  left: 72.5%;
-  top: 480px;
-  width: 198px;
-}
+.art { position: absolute; display: block; height: auto; transform: translateX(-50%); }
+.flying { left: 77.5%; top: 130px; width: 352px; }
+.laptop { left: 22%;   top: 398px; width: 176px; }
+.waving { left: 72.5%; top: 480px; width: 198px; }
 
 .content {
   position: relative;
@@ -154,9 +122,7 @@ button:focus-visible {
 
 /* ---------- 2. Homepage ---------- */
 /* On the homepage the characters scroll with the page, so they stay lined up with the title */
-.home .backdrop {
-  position: absolute;
-}
+.home .backdrop { position: absolute; }
 
 .home .content {
   width: var(--stage-width);
@@ -174,11 +140,7 @@ button:focus-visible {
   transform: translateX(-50%);
 }
 
-.title img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
+.title img { display: block; width: 100%; height: auto; }
 
 .about {
   position: absolute;
@@ -187,22 +149,10 @@ button:focus-visible {
   line-height: 1.35;
 }
 
-.tagline {
-  margin: 0;
-  font-size: 24px;
-}
+.tagline { margin: 0; font-size: 24px; }
 
-.links {
-  list-style: none;
-  margin: 0.3em 0 0;
-  padding: 0;
-  font-size: 19px;
-}
-.links a {
-  color: var(--maroon);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
+.links { list-style: none; margin: 0.3em 0 0; padding: 0; font-size: 19px; }
+.links a { color: var(--maroon); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------- 3. Blog ---------- */
 .blog-page {
@@ -257,9 +207,7 @@ button:focus-visible {
   transition: transform 0.15s ease;
 }
 
-.post-card:hover {
-  transform: translateY(-2px);
-}
+.post-card:hover { transform: translateY(-2px); }
 
 .post-card .cover {
   aspect-ratio: 4 / 1;
@@ -267,13 +215,6 @@ button:focus-visible {
 }
 
 /* Title on the left, "expand…" on the right */
-.post-card-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-}
-
 .post-card-title {
   margin: 0;
   font-size: 28px;
@@ -294,16 +235,30 @@ button:focus-visible {
   border-radius: 6px;
 }
 
-.post-card-title a:focus-visible {
-  outline: none;
-}
+.post-card-title a:focus-visible { outline: none; }
 .post-card-title a:focus-visible::after {
   outline: 3px solid var(--maroon);
   outline-offset: 4px;
 }
 
+.post-card-date {
+  margin: 2px 0 0;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* Bottom row: tags on the left, "expand…" in the bottom-right corner */
+.post-card-foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+}
+
 .expand {
   flex-shrink: 0;
+  margin-left: auto;
   font-size: 16px;
   font-weight: 400;
 }
@@ -312,7 +267,6 @@ button:focus-visible {
 .post-card .tags {
   position: relative;
   z-index: 1;
-  margin-top: 10px;
 }
 
 .filter {
@@ -325,13 +279,8 @@ button:focus-visible {
   font-weight: 400;
 }
 
-.filter strong {
-  font-weight: 500;
-}
-.filter a {
-  margin-left: auto;
-  color: var(--maroon);
-}
+.filter strong { font-weight: 500; }
+.filter a { margin-left: auto; color: var(--maroon); }
 
 .empty {
   margin: 0 0 48px;
@@ -347,7 +296,9 @@ button:focus-visible {
 }
 
 .post .cover {
-  aspect-ratio: 5 / 2;
+  /* On the post itself, show the whole image (no cropping) */
+  height: auto;
+  object-fit: contain;
   margin-bottom: 18px;
 }
 
@@ -370,33 +321,11 @@ button:focus-visible {
   line-height: 1.65;
 }
 
-.post-body h2,
-.post-body h3 {
-  font-weight: 500;
-  line-height: 1.25;
-  margin: 1.4em 0 0.4em;
-}
-.post-body a {
-  color: var(--maroon);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.post-body img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-.post-body blockquote {
-  margin: 1em 0;
-  padding-left: 16px;
-  border-left: 4px solid var(--teal);
-}
-.post-body code {
-  font-size: 0.9em;
-  background: rgba(116, 14, 14, 0.07);
-  padding: 0.1em 0.3em;
-  border-radius: 4px;
-}
+.post-body h2, .post-body h3 { font-weight: 500; line-height: 1.25; margin: 1.4em 0 0.4em; }
+.post-body a { color: var(--maroon); text-decoration: underline; text-underline-offset: 3px; }
+.post-body img { max-width: 100%; height: auto; border-radius: 4px; }
+.post-body blockquote { margin: 1em 0; padding-left: 16px; border-left: 4px solid var(--teal); }
+.post-body code { font-size: 0.9em; background: rgba(116, 14, 14, 0.07); padding: 0.1em 0.3em; border-radius: 4px; }
 
 .post .tags {
   margin-top: 28px;
@@ -406,9 +335,7 @@ button:focus-visible {
 
 /* ---------- 4. Mobile ---------- */
 @media (max-width: 800px) {
-  :root {
-    --header-height: 88px;
-  }
+  :root { --header-height: 88px; }
 
   .site-header,
   .stage,
@@ -447,20 +374,12 @@ button:focus-visible {
     height: 7px;
     border-radius: 4px;
     background: var(--white);
-    transition:
-      transform 0.2s ease,
-      opacity 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
   }
 
-  .menu-toggle[aria-expanded="true"] span:nth-child(1) {
-    transform: translateY(13px) rotate(45deg);
-  }
-  .menu-toggle[aria-expanded="true"] span:nth-child(2) {
-    opacity: 0;
-  }
-  .menu-toggle[aria-expanded="true"] span:nth-child(3) {
-    transform: translateY(-13px) rotate(-45deg);
-  }
+  .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(13px) rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-13px) rotate(-45deg); }
 
   .nav {
     display: none;
@@ -471,13 +390,8 @@ button:focus-visible {
     z-index: 4;
   }
 
-  .nav.open {
-    display: block;
-  }
-  .nav ul {
-    flex-direction: column;
-    gap: 10px;
-  }
+  .nav.open { display: block; }
+  .nav ul { flex-direction: column; gap: 10px; }
 
   .nav a {
     display: block;
@@ -487,89 +401,31 @@ button:focus-visible {
   }
 
   /* Characters */
-  .art,
-  .title {
-    transform: none;
-  }
-  .drawing {
-    left: 30%;
-    top: 1.5%;
-    width: 68%;
-  }
-  .laptop {
-    left: 1.5%;
-    top: 46.5%;
-    width: 39%;
-  }
-  .waving {
-    left: 57%;
-    top: 55%;
-    width: 40%;
-  }
+  .art, .title { transform: none; }
+  .flying { left: 30%;  top: 1.5%; width: 68%; }
+  .laptop { left: 1.5%; top: 46.5%; width: 39%; }
+  .waving { left: 57%;  top: 55%;  width: 40%; }
 
   /* Homepage */
-  .title {
-    left: 17.5%;
-    top: 21%;
-    width: 63%;
-  }
-  .about {
-    left: 4%;
-    top: 80%;
-    line-height: 1.25;
-  }
-  .tagline {
-    font-size: clamp(16px, 5.4vw, 24px);
-  }
-  .tagline .sep {
-    display: none;
-  }
-  .tagline .word {
-    display: block;
-  }
-  .links {
-    font-size: clamp(16px, 5.4vw, 24px);
-    margin-top: 0;
-  }
+  .title { left: 17.5%; top: 21%; width: 63%; }
+  .about { left: 4%; top: 80%; line-height: 1.25; }
+  .tagline { font-size: clamp(16px, 5.4vw, 24px); }
+  .tagline .sep { display: none; }
+  .tagline .word { display: block; }
+  .links { font-size: clamp(16px, 5.4vw, 24px); margin-top: 0; }
 
   /* Blog */
-  .blog-page {
-    width: calc(100% - 32px);
-    max-width: 448px;
-  }
-  .card {
-    padding: 10px 12px;
-  }
-  .post-card .cover {
-    aspect-ratio: 3 / 1;
-    margin-bottom: 8px;
-  }
-  .post-card-title {
-    font-size: 22px;
-  }
-  .expand {
-    font-size: 13px;
-  }
-  .post {
-    margin-bottom: 32px;
-    padding: 20px 16px;
-  }
-  .post .cover {
-    aspect-ratio: 2 / 1;
-  }
-  .post-title {
-    font-size: 28px;
-  }
-  .post-body {
-    font-size: 17px;
-  }
-  .tags {
-    font-size: 15px;
-  }
+  .blog-page { width: calc(100% - 32px); max-width: 448px; }
+  .card { padding: 10px 12px; }
+  .post-card .cover { aspect-ratio: 3 / 1; margin-bottom: 8px; }
+  .post-card-title { font-size: 22px; }
+  .expand { font-size: 13px; }
+  .post { margin-bottom: 32px; padding: 20px 16px; }
+  .post-title { font-size: 28px; }
+  .post-body { font-size: 17px; }
+  .tags { font-size: 15px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
-  }
+  * { transition: none !important; }
 }
