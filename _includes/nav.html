@@ -3,10 +3,10 @@
     <span></span><span></span><span></span>
   </button>
 
-  <!-- home, sketch notes and reading club go to the home page for now -->
+  <!-- sketch notes and reading club go to the home page for now -->
   <nav class="nav" id="site-nav" aria-label="Main">
     <ul>
-      <li><a href="{{ '/' | relative_url }}">home</a></li>
+      <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>home</a></li>
       <li><a href="{{ '/blog/' | relative_url }}"{% if page.url contains '/blog/' %} aria-current="page"{% endif %}>blog</a></li>
       <li><a href="{{ '/' | relative_url }}">sketch notes</a></li>
       <li><a href="{{ '/' | relative_url }}">reading club</a></li>

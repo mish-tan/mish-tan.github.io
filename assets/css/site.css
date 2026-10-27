@@ -1,0 +1,575 @@
+/* =========================================================
+   mish mash tan: one stylesheet for every page
+   1. Shared (colours, nav, characters)
+   2. Homepage
+   3. Blog
+   4. Mobile (800px and narrower)
+   ========================================================= */
+
+/* ---------- 1. Shared ---------- */
+:root {
+  --pink: #fedbee;
+  --teal: #4dd4ca;
+  --mint: #d3f2f0;
+  --maroon: #740e0e;
+  --white: #ffffff;
+
+  /* The drawing area that the nav, characters and homepage share */
+  --stage-width: min(100% - 32px, 1100px);
+  --stage-height: 865px;
+  --header-height: 100px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--pink);
+  color: var(--maroon);
+  font-family: "Fredoka", "Arial Rounded MT Bold", system-ui, sans-serif;
+  font-weight: 500;
+}
+
+body {
+  position: relative;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--maroon);
+  outline-offset: 3px;
+}
+
+/* Header: sits on top of the drawing area */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: var(--stage-width);
+  height: var(--header-height);
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.nav {
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav ul {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  display: inline-block;
+  background: var(--teal);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 26px;
+  line-height: 1;
+  padding: 0.45em 1em;
+  border-radius: 0.5em;
+  transition: transform 0.15s ease;
+}
+
+.nav a:hover {
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+/* Characters: on the blog they stay in place while the cards scroll */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.stage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--stage-width);
+  height: var(--stage-height);
+}
+
+/* Fixed sizes; "left" is where each drawing's centre sits, so they slide
+   towards the middle as the screen narrows */
+.art {
+  position: absolute;
+  display: block;
+  height: auto;
+  transform: translateX(-50%);
+}
+.drawing {
+  left: 77.5%;
+  top: 130px;
+  width: 352px;
+}
+.laptop {
+  left: 22%;
+  top: 398px;
+  width: 176px;
+}
+.waving {
+  left: 72.5%;
+  top: 480px;
+  width: 198px;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- 2. Homepage ---------- */
+/* On the homepage the characters scroll with the page, so they stay lined up with the title */
+.home .backdrop {
+  position: absolute;
+}
+
+.home .content {
+  width: var(--stage-width);
+  height: var(--stage-height);
+  margin: 0 auto;
+  overflow-x: clip;
+}
+
+.title {
+  position: absolute;
+  left: 49.5%;
+  top: 169px;
+  width: 638px;
+  margin: 0;
+  transform: translateX(-50%);
+}
+
+.title img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.about {
+  position: absolute;
+  left: 16.5%;
+  top: 709px;
+  line-height: 1.35;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 24px;
+}
+
+.links {
+  list-style: none;
+  margin: 0.3em 0 0;
+  padding: 0;
+  font-size: 19px;
+}
+.links a {
+  color: var(--maroon);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- 3. Blog ---------- */
+.blog-page {
+  width: min(100% - 32px, 700px);
+  margin: 0 auto;
+  padding-top: var(--header-height);
+}
+
+.card {
+  background: var(--mint);
+  border: 3px solid var(--maroon);
+  border-radius: 6px;
+  padding: 14px 18px;
+}
+
+.cover {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  border: 3px solid var(--maroon);
+  border-radius: 4px;
+  background: var(--white);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 17px;
+}
+
+.tags a {
+  color: var(--maroon);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Blog list */
+.post-list {
+  display: grid;
+  gap: 18px;
+  list-style: none;
+  margin: 0 0 48px;
+  padding: 0;
+}
+
+.post-card {
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+}
+
+.post-card .cover {
+  aspect-ratio: 4 / 1;
+  margin-bottom: 10px;
+}
+
+/* Title on the left, "expand…" on the right */
+.post-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.post-card-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.post-card-title a {
+  color: var(--maroon);
+  text-decoration: none;
+}
+
+/* Makes the whole card clickable, using the title link */
+.post-card-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+}
+
+.post-card-title a:focus-visible {
+  outline: none;
+}
+.post-card-title a:focus-visible::after {
+  outline: 3px solid var(--maroon);
+  outline-offset: 4px;
+}
+
+.expand {
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Tags sit above the whole-card link so they can be clicked on their own */
+.post-card .tags {
+  position: relative;
+  z-index: 1;
+  margin-top: 10px;
+}
+
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin: 0 0 18px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.filter strong {
+  font-weight: 500;
+}
+.filter a {
+  margin-left: auto;
+  color: var(--maroon);
+}
+
+.empty {
+  margin: 0 0 48px;
+  font-size: 20px;
+  text-align: center;
+  padding: 32px 18px;
+}
+
+/* Single post */
+.post {
+  margin-bottom: 48px;
+  padding: 24px 28px 28px;
+}
+
+.post .cover {
+  aspect-ratio: 5 / 2;
+  margin-bottom: 18px;
+}
+
+.post-title {
+  margin: 0 0 4px;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.post-date {
+  margin: 0 0 20px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.post-body {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.post-body h2,
+.post-body h3 {
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 1.4em 0 0.4em;
+}
+.post-body a {
+  color: var(--maroon);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.post-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.post-body blockquote {
+  margin: 1em 0;
+  padding-left: 16px;
+  border-left: 4px solid var(--teal);
+}
+.post-body code {
+  font-size: 0.9em;
+  background: rgba(116, 14, 14, 0.07);
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+}
+
+.post .tags {
+  margin-top: 28px;
+  padding-top: 14px;
+  border-top: 2px solid rgba(116, 14, 14, 0.25);
+}
+
+/* ---------- 4. Mobile ---------- */
+@media (max-width: 800px) {
+  :root {
+    --header-height: 88px;
+  }
+
+  .site-header,
+  .stage,
+  .home .content {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .stage,
+  .home .content {
+    height: auto;
+    aspect-ratio: 328 / 625;
+  }
+
+  /* Hamburger button */
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    position: absolute;
+    top: 18px;
+    left: 5.5%;
+    z-index: 5;
+    width: 60px;
+    height: 52px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--teal);
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    display: block;
+    height: 7px;
+    border-radius: 4px;
+    background: var(--white);
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(13px) rotate(45deg);
+  }
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-13px) rotate(-45deg);
+  }
+
+  .nav {
+    display: none;
+    top: 80px;
+    left: 5.5%;
+    transform: none;
+    width: 68%;
+    z-index: 4;
+  }
+
+  .nav.open {
+    display: block;
+  }
+  .nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav a {
+    display: block;
+    font-size: clamp(24px, 9vw, 40px);
+    padding: 0.2em 0.5em;
+    border-radius: 0.3em;
+  }
+
+  /* Characters */
+  .art,
+  .title {
+    transform: none;
+  }
+  .drawing {
+    left: 30%;
+    top: 1.5%;
+    width: 68%;
+  }
+  .laptop {
+    left: 1.5%;
+    top: 46.5%;
+    width: 39%;
+  }
+  .waving {
+    left: 57%;
+    top: 55%;
+    width: 40%;
+  }
+
+  /* Homepage */
+  .title {
+    left: 17.5%;
+    top: 21%;
+    width: 63%;
+  }
+  .about {
+    left: 4%;
+    top: 80%;
+    line-height: 1.25;
+  }
+  .tagline {
+    font-size: clamp(16px, 5.4vw, 24px);
+  }
+  .tagline .sep {
+    display: none;
+  }
+  .tagline .word {
+    display: block;
+  }
+  .links {
+    font-size: clamp(16px, 5.4vw, 24px);
+    margin-top: 0;
+  }
+
+  /* Blog */
+  .blog-page {
+    width: calc(100% - 32px);
+    max-width: 448px;
+  }
+  .card {
+    padding: 10px 12px;
+  }
+  .post-card .cover {
+    aspect-ratio: 3 / 1;
+    margin-bottom: 8px;
+  }
+  .post-card-title {
+    font-size: 22px;
+  }
+  .expand {
+    font-size: 13px;
+  }
+  .post {
+    margin-bottom: 32px;
+    padding: 20px 16px;
+  }
+  .post .cover {
+    aspect-ratio: 2 / 1;
+  }
+  .post-title {
+    font-size: 28px;
+  }
+  .post-body {
+    font-size: 17px;
+  }
+  .tags {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
