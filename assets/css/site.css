@@ -126,7 +126,7 @@ button:focus-visible {
 .coming-soon-splash .backdrop { position: absolute; }
 
 .home .content,
-.splash .content {
+.coming-soon-splash .content {
   width: var(--stage-width);
   height: var(--stage-height);
   margin: 0 auto;
@@ -354,14 +354,14 @@ button:focus-visible {
   .site-header,
   .stage,
   .home .content,
-  .splash .content {
+  .coming-soon-splash .content {
     width: 100%;
     max-width: 480px;
   }
 
   .stage,
   .home .content,
-  .splash .content {
+  .coming-soon-splash .content {
     height: auto;
     aspect-ratio: 328 / 625;
   }
