@@ -150,6 +150,7 @@ button:focus-visible {
 }
 
 .tagline { margin: 0; font-size: 24px; }
+.tagline .word { display: block; }
 
 .links { list-style: none; margin: 0.3em 0 0; padding: 0; font-size: 19px; }
 .links a { color: var(--maroon); text-decoration: underline; text-underline-offset: 3px; }
@@ -410,8 +411,6 @@ button:focus-visible {
   .title { left: 17.5%; top: 21%; width: 63%; }
   .about { left: 4%; top: 80%; line-height: 1.25; }
   .tagline { font-size: clamp(16px, 5.4vw, 24px); }
-  .tagline .sep { display: none; }
-  .tagline .word { display: block; }
   .links { font-size: clamp(16px, 5.4vw, 24px); margin-top: 0; }
 
   /* Default */
