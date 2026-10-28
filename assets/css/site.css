@@ -123,7 +123,7 @@ button:focus-visible {
 /* ---------- 2. Homepage and "coming soon" pages ---------- */
 /* On these pages the characters scroll with the page, so they stay lined up with the lettering */
 .home .backdrop,
-.splash .backdrop { position: absolute; }
+.coming-soon-splash .backdrop { position: absolute; }
 
 .home .content,
 .splash .content {
