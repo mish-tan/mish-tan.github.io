@@ -1,9 +1,13 @@
 ---
 layout: default
 title: sketchnotes
+body_class: splash
 ---
-<div class="default-page">
-  <h1 class="visually-hidden">Sketchnotes</h1>
+<h1 class="visually-hidden">Sketchnotes</h1>
 
-  <p class="card">Coming soon!</p>
-</div>
+<p class="coming-soon">
+  <picture>
+    <source media="(max-width: 800px)" srcset="{{ '/assets/images/coming-soon-mobile.svg' | relative_url }}">
+    <img src="{{ '/assets/images/coming-soon-desktop.svg' | relative_url }}" alt="Coming soon!">
+  </picture>
+</p>
