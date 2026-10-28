@@ -2,7 +2,7 @@
 title: I designed this site, but Claude did the coding
 cover: /assets/images/blog/initial-design.png
 cover_alt: "Hand-drawn mockups of my homepage on a pink background. On the left, the desktop layout: four teal buttons along the top (home, blog, sketch notes, reading club), the words mish mash tan in big teal lettering, and three maroon doodles of me flying with a sketchbook, sitting with a laptop and waving. On the right, two phone layouts: the same page with a teal hamburger menu, and the menu opened as a stack of teal buttons."
-tags: [coding, ai]
+tags: [coding, ai, software dev]
 ---
 
 I drew this site in Procreate, and had Claude build it. 
