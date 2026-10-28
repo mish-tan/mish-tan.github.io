@@ -28,7 +28,7 @@ Then I would think about adding some behaviour with JavaScript, but at that poin
   <figcaption>Initial mockups of the blog design done in Procreate.</figcaption>
 </figure>
 
-Now, I just drew the site I wanted and got back a result in minutes. Less than an hour to get up the home page, a few more hours to design and implement the blog view (I probably spent equivalent time on designing the site - in Procreate! - and actually implementing it), and the results... I'm impressed.
+Now, I just drew the site I wanted and got back a result in minutes. Less than an hour to get up the home page, a few more hours to design and implement the blog view (I probably spent equivalent time on designing the site and actually implementing it), and the results... I'm impressed.
 
 _And scared._
 
