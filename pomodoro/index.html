@@ -8,15 +8,29 @@ body_class: pomodoro
 
 <section class="pomodoro-timer" data-focus-minutes="15" data-break-minutes="5">
   <!-- The cat: every layer is the same size, so they stack exactly.
-       pomodoro.js swaps which tail is showing. -->
-  <div class="cat-scene" aria-hidden="true">
+       pomodoro.js swaps which tail is showing. There are two cats (normal
+       and tomato); only the one matching the scene's class is visible. -->
+  <div class="cat-scene">
     <img class="layer" src="{{ img | append: 'surface.png' | relative_url }}" alt="">
-    <img class="layer tail is-showing" src="{{ img | append: 'tail-1.png' | relative_url }}" alt="">
-    <img class="layer tail" src="{{ img | append: 'tail-2.png' | relative_url }}" alt="">
-    <img class="layer tail" src="{{ img | append: 'tail-3.png' | relative_url }}" alt="">
-    <img class="layer tail" src="{{ img | append: 'tail-4.png' | relative_url }}" alt="">
-    <img class="layer tail" src="{{ img | append: 'tail-5.png' | relative_url }}" alt="">
-    <img class="layer" src="{{ img | append: 'cat.png' | relative_url }}" alt="">
+    <img class="layer tail only-normal is-showing" src="{{ img | append: 'tail-1.png' | relative_url }}" alt="">
+    <img class="layer tail only-normal" src="{{ img | append: 'tail-2.png' | relative_url }}" alt="">
+    <img class="layer tail only-normal" src="{{ img | append: 'tail-3.png' | relative_url }}" alt="">
+    <img class="layer tail only-normal" src="{{ img | append: 'tail-4.png' | relative_url }}" alt="">
+    <img class="layer tail only-normal" src="{{ img | append: 'tail-5.png' | relative_url }}" alt="">
+    <img class="layer only-normal" src="{{ img | append: 'cat.png' | relative_url }}" alt="">
+    <img class="layer tail only-tomato is-showing" src="{{ img | append: 'tail-tomato-1.png' | relative_url }}" alt="">
+    <img class="layer tail only-tomato" src="{{ img | append: 'tail-tomato-2.png' | relative_url }}" alt="">
+    <img class="layer tail only-tomato" src="{{ img | append: 'tail-tomato-3.png' | relative_url }}" alt="">
+    <img class="layer tail only-tomato" src="{{ img | append: 'tail-tomato-4.png' | relative_url }}" alt="">
+    <img class="layer tail only-tomato" src="{{ img | append: 'tail-tomato-5.png' | relative_url }}" alt="">
+    <img class="layer only-tomato" src="{{ img | append: 'cat-tomato.png' | relative_url }}" alt="">
+
+    <!-- Sits on the left of the shelf: tomato switches to the tomato cat,
+         the yarn ball switches back -->
+    <button type="button" class="cat-switch" data-action="switch-cat" aria-pressed="false" aria-label="Tomato cat">
+      <img class="only-normal" src="{{ img | append: 'switch-tomato.png' | relative_url }}" alt="">
+      <img class="only-tomato" src="{{ img | append: 'switch-yarn.png' | relative_url }}" alt="">
+    </button>
   </div>
 
   <p class="time" role="timer" aria-live="off">15:00</p>

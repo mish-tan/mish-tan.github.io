@@ -466,9 +466,30 @@ button:focus-visible {
 
 /* Every layer is the same size, so stacking them in one grid cell lines them up */
 .cat-scene {
+  position: relative;
   display: grid;
   width: var(--scene-width);
 }
+
+/* Normal cat or tomato cat: hide whichever isn't chosen */
+.cat-scene:not(.is-tomato) .only-tomato,
+.cat-scene.is-tomato .only-normal { display: none; }
+
+/* The tomato / yarn ball button, on the left end of the shelf.
+   Percentages come from where they were drawn on the canvas. */
+.pomodoro-timer .cat-switch {
+  position: absolute;
+  left: 4.89%;
+  top: 43.9%;
+  width: 13.41%;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+}
+
+.cat-switch img { display: block; width: 100%; height: auto; }
+
+.pomodoro-timer .cat-switch:hover { transform: rotate(-8deg) scale(1.05); }
 
 .cat-scene .layer {
   grid-area: 1 / 1;
