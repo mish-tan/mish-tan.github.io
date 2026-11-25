@@ -78,8 +78,9 @@
 
   function pause() {
     if (!endsAt) return;
-    tick();
-    clearInterval(ticker);
+  tick();
+  if (!endsAt) return;
+  clearInterval(ticker);
     endsAt = null;
     stopWagging();
     render();
