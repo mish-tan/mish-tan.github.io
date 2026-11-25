@@ -12,7 +12,8 @@
 
   var display = timer.querySelector('.time');
   var status = timer.querySelector('[data-status]');
-  var tails = timer.querySelectorAll('.tail');
+  var tails = timer.querySelectorAll('.tail.only-normal');
+  var tomatoTails = timer.querySelectorAll('.tail.only-tomato');
   var toggleButton = timer.querySelector('[data-action="toggle"]');
   var pageTitle = document.title;
 
@@ -28,7 +29,10 @@
 
   function showTail(index) {
     current = index;
-    tails.forEach(function (t, n) { t.classList.toggle('is-showing', n === index); });
+    // Both cats keep the same tail position, so switching cats doesn't jump
+    [tails, tomatoTails].forEach(function (set) {
+      set.forEach(function (t, n) { t.classList.toggle('is-showing', n === index); });
+    });
   }
 
   function flickTail() {
@@ -147,6 +151,17 @@
 
   toggleButton.addEventListener('click', toggle);
   timer.querySelector('[data-action="reset"]').addEventListener('click', reset);
+
+  // ---------- tomato cat ----------
+  // Tomato switches to the tomato cat; the yarn ball switches back.
+  // Not saved: refreshing the page shows the normal cat again.
+  var scene = timer.querySelector('.cat-scene');
+  var catSwitch = timer.querySelector('[data-action="switch-cat"]');
+
+  catSwitch.addEventListener('click', function () {
+    var tomato = scene.classList.toggle('is-tomato');
+    catSwitch.setAttribute('aria-pressed', String(tomato));
+  });
 
   // ---------- custom times ----------
   // Only kept in memory, so a refresh goes back to the defaults in the HTML
