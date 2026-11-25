@@ -1,6 +1,8 @@
 title: mish mash tan
 description: artist・coder・community organiser
 timezone: Asia/Tokyo
+url: "https://mishmashtan.dev"
+baseurl: ""
 
 # Blog posts live at /blog/2026/10/28/my-post-title/
 permalink: /blog/:year/:month/:day/:title/
