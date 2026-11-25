@@ -1,5 +1,5 @@
 // Pomodoro timer with a tail-flicking cat.
-// Focus (15 min) counts down, then a break (5 min) starts by itself.
+// Focus (15 min) and break (5 min) take turns until you pause or reset.
 // The tail is a flipbook: one <img> per drawn frame, and we show one at a time.
 (function () {
   var timer = document.querySelector('.pomodoro-timer');
@@ -13,6 +13,7 @@
   var display = timer.querySelector('.time');
   var status = timer.querySelector('[data-status]');
   var tails = timer.querySelectorAll('.tail');
+  var toggleButton = timer.querySelector('[data-action="toggle"]');
   var pageTitle = document.title;
 
   var phase = 'focus';
@@ -63,6 +64,7 @@
     var text = format(remaining);
     display.textContent = text;
     timer.classList.toggle('is-break', phase === 'break');
+    toggleButton.textContent = endsAt ? 'pause' : 'start';
     document.title = endsAt ? text + ' ' + phases[phase].label.toLowerCase() + ' · ' + pageTitle : pageTitle;
   }
 
@@ -110,23 +112,18 @@
     status.textContent = 'Reset to focus';
   }
 
+  function toggle() {
+    if (endsAt) pause();
+    else start();
+  }
+
   function phaseOver() {
+    // Switch to the other phase and keep going: focus, break, focus, break...
     chime();
-    if (phase === 'focus') {
-      // Focus done: go straight into the break
-      phase = 'break';
-      remaining = phases.break.ms;
-      run();
-      status.textContent = 'Break time';
-    } else {
-      // Break done: set up the next focus, and wait for start
-      stop();
-      phase = 'focus';
-      remaining = phases.focus.ms;
-      render();
-      document.title = 'Break over · ' + pageTitle;
-      status.textContent = 'Break over. Press start to focus again';
-    }
+    phase = phase === 'focus' ? 'break' : 'focus';
+    remaining = phases[phase].ms;
+    run();
+    status.textContent = phase === 'break' ? 'Break time' : 'Back to focus';
   }
 
   // A soft two-note chime, made in the browser so there's no sound file to host
@@ -148,8 +145,7 @@
     });
   }
 
-  timer.querySelector('[data-action="start"]').addEventListener('click', start);
-  timer.querySelector('[data-action="pause"]').addEventListener('click', pause);
+  toggleButton.addEventListener('click', toggle);
   timer.querySelector('[data-action="reset"]').addEventListener('click', reset);
 
   render();
