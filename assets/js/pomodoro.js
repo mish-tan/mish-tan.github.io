@@ -148,5 +148,39 @@
   toggleButton.addEventListener('click', toggle);
   timer.querySelector('[data-action="reset"]').addEventListener('click', reset);
 
+  // ---------- custom times ----------
+  // Only kept in memory, so a refresh goes back to the defaults in the HTML
+  var editButton = timer.querySelector('[data-action="edit"]');
+  var form = timer.querySelector('.edit-times');
+
+  function openEdit() {
+    form.elements.focus.value = phases.focus.ms / 60000;
+    form.elements.break.value = phases.break.ms / 60000;
+    form.hidden = false;
+    editButton.setAttribute('aria-expanded', 'true');
+    form.elements.focus.focus();
+  }
+
+  function closeEdit() {
+    form.hidden = true;
+    editButton.setAttribute('aria-expanded', 'false');
+  }
+
+  editButton.addEventListener('click', function () {
+    if (form.hidden) openEdit();
+    else closeEdit();
+  });
+
+  timer.querySelector('[data-action="cancel"]').addEventListener('click', closeEdit);
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault(); // stay on the page
+    phases.focus.ms = Number(form.elements.focus.value) * 60 * 1000;
+    phases.break.ms = Number(form.elements.break.value) * 60 * 1000;
+    closeEdit();
+    reset(); // start fresh with the new times
+    status.textContent = 'Times saved';
+  });
+
   render();
 })();
