@@ -32,7 +32,7 @@
   }
 
   function startWagging() {
-    if (wagger) return;
+    if (reduceMotion || wagger) return;
     wagger = setInterval(function () {
       step = (step + 1) % order.length;
       showTail(order[step]);
