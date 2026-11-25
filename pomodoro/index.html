@@ -1,0 +1,33 @@
+---
+layout: default
+title: pomodoro
+body_class: pomodoro
+---
+{% assign img = '/assets/images/pomodoro/' %}
+<h1 class="visually-hidden">Pomodoro timer</h1>
+
+<section class="pomodoro-timer" data-minutes="15">
+  <!-- The cat: every layer is the same size, so they stack exactly.
+       pomodoro.js swaps which tail is showing. -->
+  <div class="cat-scene" aria-hidden="true">
+    <img class="layer" src="{{ img | append: 'shelf.png' | relative_url }}" alt="">
+    <img class="layer tail is-showing" src="{{ img | append: 'tail-1.png' | relative_url }}" alt="">
+    <img class="layer tail" src="{{ img | append: 'tail-2.png' | relative_url }}" alt="">
+    <img class="layer tail" src="{{ img | append: 'tail-3.png' | relative_url }}" alt="">
+    <img class="layer tail" src="{{ img | append: 'tail-4.png' | relative_url }}" alt="">
+    <img class="layer tail" src="{{ img | append: 'tail-5.png' | relative_url }}" alt="">
+    <img class="layer" src="{{ img | append: 'cat.png' | relative_url }}" alt="">
+  </div>
+
+  <p class="time" role="timer" aria-live="off">15:00</p>
+
+  <div class="controls">
+    <button type="button" data-action="start">start</button>
+    <button type="button" data-action="pause">pause</button>
+    <button type="button" data-action="reset">reset</button>
+  </div>
+
+  <p class="visually-hidden" aria-live="polite" data-status></p>
+</section>
+
+<script src="{{ '/assets/js/pomodoro.js' | relative_url }}"></script>
