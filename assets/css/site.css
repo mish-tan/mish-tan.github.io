@@ -517,12 +517,5 @@ button:focus-visible {
   }
 }
 
-.pomodoro-timer.is-done .time { animation: pomodoro-done 0.6s ease-in-out 3; }
-
-@keyframes pomodoro-done {
-  50% { transform: scale(1.08) rotate(-2deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pomodoro-timer.is-done .time { animation: none; }
-}
+/* Break time: the numbers turn mint */
+.pomodoro-timer.is-break .time { color: var(--mint); }
