@@ -50,4 +50,4 @@ body_class: pomodoro
   <p class="visually-hidden" aria-live="polite" data-status></p>
 </section>
 
-<script src="{{ '/assets/js/pomodoro.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/pomodoro.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
