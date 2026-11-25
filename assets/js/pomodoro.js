@@ -1,49 +1,54 @@
-// Pomodoro timer with a tail-swishing cat.
+// Pomodoro timer with a tail-flicking cat.
+// Focus (15 min) counts down, then a break (5 min) starts by itself.
 // The tail is a flipbook: one <img> per drawn frame, and we show one at a time.
 (function () {
   var timer = document.querySelector('.pomodoro-timer');
   if (!timer) return;
 
-  var minutes = Number(timer.dataset.minutes) || 15;
-  var total = minutes * 60 * 1000;
+  var phases = {
+    focus: { ms: (Number(timer.dataset.focusMinutes) || 15) * 60 * 1000, label: 'Focus' },
+    break: { ms: (Number(timer.dataset.breakMinutes) || 5) * 60 * 1000, label: 'Break' }
+  };
 
   var display = timer.querySelector('.time');
   var status = timer.querySelector('[data-status]');
   var tails = timer.querySelectorAll('.tail');
   var pageTitle = document.title;
 
-  var remaining = total;  // ms left
-  var endsAt = null;      // when running: the clock time we finish at
+  var phase = 'focus';
+  var remaining = phases.focus.ms; // ms left in this phase
+  var endsAt = null;               // when running: the clock time this phase ends
   var ticker = null;
 
   // ---------- the tail ----------
-  // Play the frames forwards then backwards (1 2 3 4 5 4 3 2 1 ...) so it swishes
-  var order = [];
-  for (var i = 0; i < tails.length; i++) order.push(i);
-  for (var j = tails.length - 2; j > 0; j--) order.push(j);
-
-  var step = 0;
-  var wagger = null;
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var FRAME_MS = reduceMotion ? 900 : 220;
+  // Every 2 to 5 seconds, jump to a different, randomly picked tail frame
+  var current = 0;
+  var tailTimer = null;
 
   function showTail(index) {
+    current = index;
     tails.forEach(function (t, n) { t.classList.toggle('is-showing', n === index); });
   }
 
-  function startWagging() {
-    if (reduceMotion || wagger) return;
-    wagger = setInterval(function () {
-      step = (step + 1) % order.length;
-      showTail(order[step]);
-    }, FRAME_MS);
+  function flickTail() {
+    var next = Math.floor(Math.random() * (tails.length - 1));
+    if (next >= current) next++; // never pick the frame that's already showing
+    showTail(next);
+    scheduleFlick();
   }
 
-  function stopWagging() {
-    clearInterval(wagger);
-    wagger = null;
-    step = 0;
-    showTail(0);
+  function scheduleFlick() {
+    var wait = 2000 + Math.random() * 3000; // 2 to 5 seconds
+    tailTimer = setTimeout(flickTail, wait);
+  }
+
+  function startTail() {
+    if (!tailTimer) scheduleFlick();
+  }
+
+  function stopTail() {
+    clearTimeout(tailTimer);
+    tailTimer = null;
   }
 
   // ---------- the clock ----------
@@ -57,7 +62,8 @@
   function render() {
     var text = format(remaining);
     display.textContent = text;
-    document.title = endsAt ? text + ' · ' + pageTitle : pageTitle;
+    timer.classList.toggle('is-break', phase === 'break');
+    document.title = endsAt ? text + ' ' + phases[phase].label.toLowerCase() + ' · ' + pageTitle : pageTitle;
   }
 
   function tick() {
@@ -65,46 +71,62 @@
     // stays accurate even when the tab is in the background.
     remaining = Math.max(0, endsAt - Date.now());
     render();
-    if (remaining === 0) finish();
+    if (remaining === 0) phaseOver();
+  }
+
+  function run() {
+    endsAt = Date.now() + remaining;
+    clearInterval(ticker);
+    ticker = setInterval(tick, 250);
+    startTail();
+    render();
+  }
+
+  function stop() {
+    clearInterval(ticker);
+    endsAt = null;
+    stopTail();
   }
 
   function start() {
-    if (endsAt || remaining === 0) return;
-    endsAt = Date.now() + remaining;
-    ticker = setInterval(tick, 250);
-    startWagging();
-    status.textContent = 'Timer started';
+    if (endsAt) return;
+    run();
+    status.textContent = phases[phase].label + ' started';
   }
 
   function pause() {
     if (!endsAt) return;
-  tick();
-  if (!endsAt) return;
-  clearInterval(ticker);
-    endsAt = null;
-    stopWagging();
+    tick();
+    stop();
     render();
-    status.textContent = 'Timer paused';
+    status.textContent = 'Paused';
   }
 
   function reset() {
-    clearInterval(ticker);
-    endsAt = null;
-    remaining = total;
-    stopWagging();
-    timer.classList.remove('is-done');
+    stop();
+    phase = 'focus';
+    remaining = phases.focus.ms;
     render();
-    status.textContent = 'Timer reset';
+    status.textContent = 'Reset to focus';
   }
 
-  function finish() {
-    clearInterval(ticker);
-    endsAt = null;
-    stopWagging();
-    timer.classList.add('is-done');
-    document.title = 'Done! · ' + pageTitle;
-    status.textContent = 'Time is up';
+  function phaseOver() {
     chime();
+    if (phase === 'focus') {
+      // Focus done: go straight into the break
+      phase = 'break';
+      remaining = phases.break.ms;
+      run();
+      status.textContent = 'Break time';
+    } else {
+      // Break done: set up the next focus, and wait for start
+      stop();
+      phase = 'focus';
+      remaining = phases.focus.ms;
+      render();
+      document.title = 'Break over · ' + pageTitle;
+      status.textContent = 'Break over. Press start to focus again';
+    }
   }
 
   // A soft two-note chime, made in the browser so there's no sound file to host

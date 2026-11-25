@@ -6,11 +6,11 @@ body_class: pomodoro
 {% assign img = '/assets/images/pomodoro/' %}
 <h1 class="visually-hidden">Pomodoro timer</h1>
 
-<section class="pomodoro-timer" data-minutes="15">
+<section class="pomodoro-timer" data-focus-minutes="15" data-break-minutes="5">
   <!-- The cat: every layer is the same size, so they stack exactly.
        pomodoro.js swaps which tail is showing. -->
   <div class="cat-scene" aria-hidden="true">
-    <img class="layer" src="{{ img | append: 'shelf.png' | relative_url }}" alt="">
+    <img class="layer" src="{{ img | append: 'surface.png' | relative_url }}" alt="">
     <img class="layer tail is-showing" src="{{ img | append: 'tail-1.png' | relative_url }}" alt="">
     <img class="layer tail" src="{{ img | append: 'tail-2.png' | relative_url }}" alt="">
     <img class="layer tail" src="{{ img | append: 'tail-3.png' | relative_url }}" alt="">
