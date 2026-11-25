@@ -488,12 +488,7 @@ button:focus-visible {
 }
 
 /* Same look as the nav buttons at the top of the page */
-.controls {
-  display: flex;
-  gap: 20px;
-}
-
-.controls button {
+.pomodoro-timer button {
   background: var(--teal);
   color: var(--white);
   border: 0;
@@ -506,14 +501,83 @@ button:focus-visible {
   transition: transform 0.15s ease;
 }
 
-.controls button:hover { transform: translateY(-2px) rotate(-1deg); }
+.pomodoro-timer button:hover { transform: translateY(-2px) rotate(-1deg); }
 
-/* Narrow screens: stack the buttons */
+/* Wide screens: three equal-width buttons in a row */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+  gap: 20px;
+}
+
+.controls > button,
+.edit-group > button { width: 100%; }
+
+.edit-group { position: relative; }
+
+/* The edit panel: a stack of focus / break / save + cancel,
+   floating just under the edit button so nothing else moves */
+.edit-times {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+.edit-times[hidden] { display: none; }
+
+.edit-times label {
+  /* Same-width word column, so the two number boxes line up */
+  display: grid;
+  grid-template-columns: 2.8em auto;
+  align-items: center;
+  gap: 0.4em;
+  text-align: right;
+}
+
+.edit-times input {
+  width: 3.2em;
+  padding: 0.2em 0.3em;
+  border: 3px solid var(--maroon);
+  border-radius: 0.4em;
+  background: var(--mint);
+  color: var(--maroon);
+  font: inherit;
+  text-align: center;
+}
+
+/* Selected box: white instead of the browser's black focus ring */
+.edit-times input:focus {
+  outline: none;
+  background: var(--white);
+}
+
+.edit-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.edit-actions button { font-size: 22px; }
+
+/* Narrow screens: stack the buttons, and the panel pushes content down */
 @media (max-width: 800px) {
   .controls {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 12px;
     width: min(60vw, 240px);
+  }
+
+  .edit-times {
+    position: static;
+    transform: none;
+    margin-top: 16px;
   }
 }
 

@@ -25,6 +25,26 @@ body_class: pomodoro
     <!-- One button: says "start" when stopped, "pause" while running -->
     <button type="button" data-action="toggle">start</button>
     <button type="button" data-action="reset">reset</button>
+
+    <!-- The edit panel sits under the edit button, hidden until it's pressed.
+         Custom times aren't saved: refreshing the page goes back to 15 / 5. -->
+    <div class="edit-group">
+      <button type="button" data-action="edit" aria-expanded="false" aria-controls="edit-times">edit</button>
+      <form class="edit-times" id="edit-times" hidden>
+        <label>focus
+          <input type="number" name="focus" min="1" max="180" step="1" inputmode="numeric" required>
+          <span class="visually-hidden">minutes</span>
+        </label>
+        <label>break
+          <input type="number" name="break" min="1" max="60" step="1" inputmode="numeric" required>
+          <span class="visually-hidden">minutes</span>
+        </label>
+        <div class="edit-actions">
+          <button type="submit">save</button>
+          <button type="button" data-action="cancel">cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <p class="visually-hidden" aria-live="polite" data-status></p>
