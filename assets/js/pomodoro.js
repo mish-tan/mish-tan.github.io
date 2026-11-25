@@ -158,7 +158,11 @@
     form.elements.break.value = phases.break.ms / 60000;
     form.hidden = false;
     editButton.setAttribute('aria-expanded', 'true');
-    form.elements.focus.focus();
+    // On wide screens, put the cursor in the first box. Not on phones/narrow
+    // screens: there it would scroll the page and pop up the keyboard.
+    if (window.matchMedia('(min-width: 801px)').matches) {
+      form.elements.focus.focus({ preventScroll: true });
+    }
   }
 
   function closeEdit() {
